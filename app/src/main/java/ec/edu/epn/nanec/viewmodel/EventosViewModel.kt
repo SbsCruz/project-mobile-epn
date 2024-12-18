@@ -9,38 +9,39 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class EventosViewModel : ViewModel() {
-    private val _eventos = MutableStateFlow<List<Evento>>(emptyList())
-    val eventos: StateFlow<List<Evento>> = _eventos
+class EventosViewModel : ViewModel() { // hereda de viewmodel
+  //crea 2 variables
+  private val _eventos = MutableStateFlow<List<Evento>>(emptyList())
+  val eventos: StateFlow<List<Evento>> = _eventos
 
-    init {
-        //Log.d("ViewModel", "ViewModel inicializado")
-        cargarEventos()
-    }
+  init {
+    //Log.d("ViewModel", "ViewModel inicializado")
+    cargarEventos()
+  }
 
-    private fun cargarEventos() {
-        viewModelScope.launch {
-            try {
-                val eventosApi = RetrofitInstance.api
-                val eventosRecibidos = eventosApi.obtenerEventos()
-                _eventos.value = eventosRecibidos
-                Log.d("SALIDA", "Prueba de salida")
-                eventosRecibidos.forEach { evento ->
-                    Log.d("SALIDA", "Evento recibido: $evento")
-                }
-            } catch (e: retrofit2.HttpException) {
-                // Error HTTP (por ejemplo, 404, 500)
-                e.printStackTrace()
-                println("Error HTTP: ${e.code()} - ${e.message()}")
-            } catch (e: java.net.ConnectException) {
-                // Error de conexión (servidor no accesible)
-                e.printStackTrace()
-                println("Error de conexión: ${e.message}")
-            } catch (e: Exception) {
-                // Otros errores
-                e.printStackTrace()
-                println("Error desconocido: ${e.message}")
-            }
+  private fun cargarEventos() {
+    viewModelScope.launch {
+      try {
+        val eventosApi = RetrofitInstance.api
+        val eventosRecibidos = eventosApi.obtenerEventos()
+        _eventos.value = eventosRecibidos
+        Log.d("SALIDA", "Prueba de salida")
+        eventosRecibidos.forEach { evento ->
+          Log.d("SALIDA", "Evento recibido: $evento")
         }
+      } catch (e: retrofit2.HttpException) {
+        // Error HTTP (por ejemplo, 404, 500)
+        e.printStackTrace()
+        println("Error HTTP: ${e.code()} - ${e.message()}")
+      } catch (e: java.net.ConnectException) {
+        // Error de conexión (servidor no accesible)
+        e.printStackTrace()
+        println("Error de conexión: ${e.message}")
+      } catch (e: Exception) {
+        // Otros errores
+        e.printStackTrace()
+        println("Error desconocido: ${e.message}")
+      }
     }
+  }
 }

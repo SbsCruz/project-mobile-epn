@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">nanEC</string>
     <string name="title_activity_detalle">DetalleActivity</string>
-    <string name="web_client_id">442747339401-0nm0rc73v2odu385o07lb8e6an0jc10p.apps.googleusercontent.com</string>
+    <string name="web_client_id">use-your-api</string>
 </resources>

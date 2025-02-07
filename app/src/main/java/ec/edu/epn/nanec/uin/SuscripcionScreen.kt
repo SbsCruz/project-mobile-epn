@@ -16,32 +16,32 @@ import ec.edu.epn.nanec.viewmodel.UsuarioViewModel
 
 @Composable
 fun SeleccionTipoSuscripcionScreen(
-    usuarioViewModel: UsuarioViewModel,
-    onSuscripcionCompletada: () -> Unit
+  usuarioViewModel: UsuarioViewModel,
+  onSuscripcionCompletada: () -> Unit
 ) {
-    /*permite mostrar un toast*/
-    val context = LocalContext.current
-    val mensajeToast = usuarioViewModel.mensajeSuscripcion.collectAsState().value
-    LaunchedEffect(mensajeToast) {
-        mensajeToast?.let {
-            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-            usuarioViewModel.limpiarMensajeSuscrpcionToast()
-        }
+  /*permite mostrar un toast*/
+  val context = LocalContext.current
+  val mensajeToast = usuarioViewModel.mensajeSuscripcion.collectAsState().value
+  LaunchedEffect(mensajeToast) {
+    mensajeToast?.let {
+      Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+      usuarioViewModel.limpiarMensajeSuscrpcionToast()
     }
-    /*código para mostrar los botones de suscripción*/
-    val tipos = listOf("musical", "gastronomico", "sitio")
+  }
+  /*código para mostrar los botones de suscripción*/
+  val tipos = listOf("musical", "gastronomico", "sitio")
 
-    Column(modifier = Modifier.padding(16.dp)) {
-        tipos.forEach { tipo ->
-            Button(
-                onClick = {
-                    usuarioViewModel.suscribirUsuario(tipo)
-                    onSuscripcionCompletada()
-                },
-                modifier = Modifier.padding(vertical = 8.dp)
-            ) {
-                Text("Suscribirse a evento $tipo")
-            }
-        }
+  Column(modifier = Modifier.padding(16.dp)) {
+    tipos.forEach { tipo ->
+      Button(
+        onClick = {
+          usuarioViewModel.suscribirUsuario(tipo)
+          onSuscripcionCompletada()
+        },
+        modifier = Modifier.padding(vertical = 8.dp)
+      ) {
+        Text("Suscribirse a evento $tipo")
+      }
     }
+  }
 }

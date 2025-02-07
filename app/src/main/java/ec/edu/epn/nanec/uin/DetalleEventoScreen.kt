@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import ec.edu.epn.nanec.viewmodel.EventosViewModel
 
 @Composable
-fun NewScreen(eventoId: String?, eventosViewModel: EventosViewModel) {
+fun DetalleEventoScreen(eventoId: String?, eventosViewModel: EventosViewModel) {
   val eventos = eventosViewModel.eventos.collectAsState().value
   val evento = eventos.find { it._id == eventoId }
 

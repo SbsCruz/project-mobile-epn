@@ -23,7 +23,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAtNvyVaxhCrSoqwkv1XnS6YdU_oDKVJzA"
+            android:value="<insert-api-key>"
             />
         <service
             android:name=".MyFirebaseMessagingService"
